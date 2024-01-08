@@ -442,41 +442,47 @@ int main(int argc, char**)
 
     int ref_sum = sum_naive(data, items_count);
 
-    int full_sum = 0;
-    int last_sum = 0;
-    u64 min_elapsed_cycles = -1;
-    for (int it_i = 0; it_i < iteration_count; it_i++) {
-        u64 start_clock = __rdtsc();
+    int full_sum;
+    int last_sum;
+    u64 min_elapsed_cycles;
+    f64 op_per_clock;
 
-        //int sum = sum_naive(data, items_count);
-        //int sum = sum2(data, items_count);
-        //int sum = sum4(data, items_count);
-        //int sum = sum8(data, items_count);
-        //int sum = sum16(data, items_count);
-        //int sum = sum16_ptr(data, items_count);
-        //int sum = sum_avx_ptr(data, items_count);
-        //int sum = sum_avx_dual_ptr(data, items_count);
-        //int sum = sum_avx_quad_ptr(data, items_count);
-        //int sum = sum_avx_octo_ptr(data, items_count);
-        //int sum = sum_opt(data, items_count);
-        //int sum = sum_ptr_opt(data, items_count);
-        //int sum = sum_avx_ptr_opt(data, items_count);
-        //int sum = sum_avx_dual_ptr_opt(data, items_count);
-        int sum = sum_avx_quad_ptr_opt(data, items_count);
-        //int sum = sum_avx_octo_ptr_opt(data, items_count);
+#define test_func(func_name)                                         \
+    full_sum = 0;                                                    \
+    last_sum = 0;                                                    \
+    min_elapsed_cycles = -1;                                         \
+    for (int it_i = 0; it_i < iteration_count; it_i++) {             \
+        u64 start_clock = __rdtsc();                                 \
+                                                                     \
+        int sum = func_name(data, items_count);                      \
+        u64 end_clock = __rdtsc();                                   \
+        u64 elapsed_cycles = end_clock - start_clock;                \
+        if (elapsed_cycles < min_elapsed_cycles)                     \
+            min_elapsed_cycles = elapsed_cycles;                     \
+                                                                     \
+        last_sum = sum;                                              \
+        full_sum += sum;                                             \
+    }                                                                \
+                                                                     \
+    op_per_clock = (f64)items_count / (f64)min_elapsed_cycles;       \
+    printf("%s, ref sum: %d, sum: %d, full sum: %d, op/clock: %f\n", #func_name, ref_sum, last_sum, full_sum, op_per_clock) \
 
-        u64 end_clock = __rdtsc();
-        u64 elapsed_cycles = end_clock - start_clock;
-        if (elapsed_cycles < min_elapsed_cycles)
-            min_elapsed_cycles = elapsed_cycles;
-
-        last_sum = sum;
-        full_sum += sum;
-    }
-
-    // op / clock
-    f64 op_per_clock = (f64)items_count / (f64)min_elapsed_cycles;
-    printf("Ref sum: %d, sum: %d, full sum: %d, op/clock: %f\n", ref_sum, last_sum, full_sum, op_per_clock);
+    test_func(sum_naive);
+    test_func(sum2);
+    test_func(sum4);
+    test_func(sum8);
+    test_func(sum16);
+    test_func(sum16_ptr);
+    test_func(sum_avx_ptr);
+    test_func(sum_avx_dual_ptr);
+    test_func(sum_avx_quad_ptr);
+    test_func(sum_avx_octo_ptr);
+    test_func(sum_opt);
+    test_func(sum_ptr_opt);
+    test_func(sum_avx_ptr_opt);
+    test_func(sum_avx_dual_ptr_opt);
+    test_func(sum_avx_quad_ptr_opt);
+    test_func(sum_avx_octo_ptr_opt);
 
     return 0;
 }

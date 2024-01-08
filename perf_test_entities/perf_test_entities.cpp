@@ -16,7 +16,7 @@ struct vector3 {
 
 #pragma optimize("", off)
 void __declspec(noinline) apply_velocity_noopt(vector3* positions, vector3* velocities, int count) {
-    for (auto i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) {
         positions[i].x += velocities[i].x;
         positions[i].y += velocities[i].y;
         positions[i].z += velocities[i].z;
@@ -24,7 +24,7 @@ void __declspec(noinline) apply_velocity_noopt(vector3* positions, vector3* velo
 }
 
 void __declspec(noinline) apply_velocity_dual_noopt(vector3* positions, vector3* velocities, int count) {
-    for (auto i = 0; i < count; i += 2) {
+    for (int i = 0; i < count; i += 2) {
         positions[i].x += velocities[i].x;
         positions[i].y += velocities[i].y;
         positions[i].z += velocities[i].z;
@@ -36,7 +36,7 @@ void __declspec(noinline) apply_velocity_dual_noopt(vector3* positions, vector3*
 }
 
 void __declspec(noinline) apply_velocity_quad_noopt(vector3* positions, vector3* velocities, int count) {
-    for (auto i = 0; i < count; i += 4) {
+    for (int i = 0; i < count; i += 4) {
         positions[i].x += velocities[i].x;
         positions[i].y += velocities[i].y;
         positions[i].z += velocities[i].z;
@@ -56,7 +56,7 @@ void __declspec(noinline) apply_velocity_quad_noopt(vector3* positions, vector3*
 }
 
 void __declspec(noinline) apply_velocity_octo_noopt(vector3* positions, vector3* velocities, int count) {
-    for (auto i = 0; i < count; i += 8) {
+    for (int i = 0; i < count; i += 8) {
         positions[i].x += velocities[i].x;
         positions[i].y += velocities[i].y;
         positions[i].z += velocities[i].z;
@@ -92,7 +92,7 @@ void __declspec(noinline) apply_velocity_octo_noopt(vector3* positions, vector3*
 }
 
 void __declspec(noinline) apply_velocity_ref_noopt(vector3* positions, vector3* velocities, int count) {
-    for (auto i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) {
         auto& p = positions[i];
         auto& v = velocities[i];
         p.x += v.x;
@@ -102,7 +102,7 @@ void __declspec(noinline) apply_velocity_ref_noopt(vector3* positions, vector3* 
 }
 
 void __declspec(noinline) apply_velocity_soa_noopt(float* pxs, float* pys, float* pzs, float* vxs, float* vys, float* vzs, int count) {
-    for (auto i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) {
         pxs[i] += vxs[i];
         pys[i] += vys[i];
         pzs[i] += vzs[i];
@@ -112,7 +112,7 @@ void __declspec(noinline) apply_velocity_soa_noopt(float* pxs, float* pys, float
 #pragma optimize("", on)
 
 void __declspec(noinline) apply_velocity_opt(vector3* positions, vector3* velocities, int count) {
-    for (auto i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) {
         positions[i].x += velocities[i].x;
         positions[i].y += velocities[i].y;
         positions[i].z += velocities[i].z;
@@ -120,7 +120,7 @@ void __declspec(noinline) apply_velocity_opt(vector3* positions, vector3* veloci
 }
 
 void __declspec(noinline) apply_velocity_dual_opt(vector3* positions, vector3* velocities, int count) {
-    for (auto i = 0; i < count; i += 2) {
+    for (int i = 0; i < count; i += 2) {
         positions[i].x += velocities[i].x;
         positions[i].y += velocities[i].y;
         positions[i].z += velocities[i].z;
@@ -132,7 +132,7 @@ void __declspec(noinline) apply_velocity_dual_opt(vector3* positions, vector3* v
 }
 
 void __declspec(noinline) apply_velocity_quad_opt(vector3* positions, vector3* velocities, int count) {
-    for (auto i = 0; i < count; i += 4) {
+    for (int i = 0; i < count; i += 4) {
         positions[i].x += velocities[i].x;
         positions[i].y += velocities[i].y;
         positions[i].z += velocities[i].z;
@@ -152,7 +152,7 @@ void __declspec(noinline) apply_velocity_quad_opt(vector3* positions, vector3* v
 }
 
 void __declspec(noinline) apply_velocity_octo_opt(vector3* positions, vector3* velocities, int count) {
-    for (auto i = 0; i < count; i += 8) {
+    for (int i = 0; i < count; i += 8) {
         positions[i].x += velocities[i].x;
         positions[i].y += velocities[i].y;
         positions[i].z += velocities[i].z;
@@ -188,7 +188,7 @@ void __declspec(noinline) apply_velocity_octo_opt(vector3* positions, vector3* v
 }
 
 void __declspec(noinline) apply_velocity_soa_opt(float* pxs, float* pys, float* pzs, float* vxs, float* vys, float* vzs, int count) {
-    for (auto i = 0; i < count; i++) {
+    for (int i = 0; i < count; i++) {
         pxs[i] += vxs[i];
         pys[i] += vys[i];
         pzs[i] += vzs[i];
@@ -196,7 +196,7 @@ void __declspec(noinline) apply_velocity_soa_opt(float* pxs, float* pys, float* 
 }
 
 void __declspec(noinline) apply_velocity_dual_soa_opt(float* pxs, float* pys, float* pzs, float* vxs, float* vys, float* vzs, int count) {
-    for (auto i = 0; i < count; i += 2) {
+    for (int i = 0; i < count; i += 2) {
         pxs[i] += vxs[i];
         pys[i] += vys[i];
         pzs[i] += vzs[i];
@@ -208,10 +208,10 @@ void __declspec(noinline) apply_velocity_dual_soa_opt(float* pxs, float* pys, fl
 }
 
 void __declspec(noinline) apply_velocity_quad_soa_opt(float* pxs, float* pys, float* pzs, float* vxs, float* vys, float* vzs, int count) {
-    for (auto i = 0; i < count; i += 4) {
-        pxs[i] += vxs[i];
-        pys[i] += vys[i];
-        pzs[i] += vzs[i];
+    for (int i = 0; i < count; i += 4) {
+        pxs[i + 0] += vxs[i + 0];
+        pys[i + 0] += vys[i + 0];
+        pzs[i + 0] += vzs[i + 0];
 
         pxs[i + 1] += vxs[i + 1];
         pys[i + 1] += vys[i + 1];
@@ -228,7 +228,7 @@ void __declspec(noinline) apply_velocity_quad_soa_opt(float* pxs, float* pys, fl
 }
 
 void __declspec(noinline) apply_velocity_soa_avx(float* pxs, float* pys, float* pzs, float* vxs, float* vys, float* vzs, int count) {
-    for (auto i = 0; i < count; i += 8) {
+    for (int i = 0; i < count; i += 8) {
         _mm256_store_ps(&pxs[i], _mm256_add_ps(_mm256_load_ps(&pxs[i]), _mm256_load_ps(&vxs[i])));
         _mm256_store_ps(&pys[i], _mm256_add_ps(_mm256_load_ps(&pys[i]), _mm256_load_ps(&vys[i])));
         _mm256_store_ps(&pzs[i], _mm256_add_ps(_mm256_load_ps(&pzs[i]), _mm256_load_ps(&vzs[i])));
@@ -236,7 +236,7 @@ void __declspec(noinline) apply_velocity_soa_avx(float* pxs, float* pys, float* 
 }
 
 void __declspec(noinline) apply_velocity_soa_dual_avx(float* pxs, float* pys, float* pzs, float* vxs, float* vys, float* vzs, int count) {
-    for (auto i = 0; i < count; i += 16) {
+    for (int i = 0; i < count; i += 16) {
         _mm256_store_ps(&pxs[i], _mm256_add_ps(_mm256_load_ps(&pxs[i]), _mm256_load_ps(&vxs[i])));
         _mm256_store_ps(&pys[i], _mm256_add_ps(_mm256_load_ps(&pys[i]), _mm256_load_ps(&vys[i])));
         _mm256_store_ps(&pzs[i], _mm256_add_ps(_mm256_load_ps(&pzs[i]), _mm256_load_ps(&vzs[i])));
@@ -248,10 +248,10 @@ void __declspec(noinline) apply_velocity_soa_dual_avx(float* pxs, float* pys, fl
 }
 
 void __declspec(noinline) apply_velocity_soa_quad_avx(float* pxs, float* pys, float* pzs, float* vxs, float* vys, float* vzs, int count) {
-    for (auto i = 0; i < count; i += 32) {
-        _mm256_store_ps(&pxs[i], _mm256_add_ps(_mm256_load_ps(&pxs[i]), _mm256_load_ps(&vxs[i])));
-        _mm256_store_ps(&pys[i], _mm256_add_ps(_mm256_load_ps(&pys[i]), _mm256_load_ps(&vys[i])));
-        _mm256_store_ps(&pzs[i], _mm256_add_ps(_mm256_load_ps(&pzs[i]), _mm256_load_ps(&vzs[i])));
+    for (int i = 0; i < count; i += 32) {
+        _mm256_store_ps(&pxs[i +  0], _mm256_add_ps(_mm256_load_ps(&pxs[i +  0]), _mm256_load_ps(&vxs[i +  0])));
+        _mm256_store_ps(&pys[i +  0], _mm256_add_ps(_mm256_load_ps(&pys[i +  0]), _mm256_load_ps(&vys[i +  0])));
+        _mm256_store_ps(&pzs[i +  0], _mm256_add_ps(_mm256_load_ps(&pzs[i +  0]), _mm256_load_ps(&vzs[i +  0])));
 
         _mm256_store_ps(&pxs[i +  8], _mm256_add_ps(_mm256_load_ps(&pxs[i +  8]), _mm256_load_ps(&vxs[i +  8])));
         _mm256_store_ps(&pys[i +  8], _mm256_add_ps(_mm256_load_ps(&pys[i +  8]), _mm256_load_ps(&vys[i +  8])));
@@ -268,7 +268,7 @@ void __declspec(noinline) apply_velocity_soa_quad_avx(float* pxs, float* pys, fl
 }
 
 void __declspec(noinline) apply_velocity_soa_avx_2(float* pxs, float* pys, float* pzs, float* vxs, float* vys, float* vzs, int count) {
-    for (auto i = 0; i < count; i += 8) {
+    for (int i = 0; i < count; i += 8) {
         auto npx = _mm256_add_ps(_mm256_load_ps(&pxs[i]), _mm256_load_ps(&vxs[i]));
         auto npy = _mm256_add_ps(_mm256_load_ps(&pys[i]), _mm256_load_ps(&vys[i]));
         auto npz = _mm256_add_ps(_mm256_load_ps(&pzs[i]), _mm256_load_ps(&vzs[i]));
@@ -287,7 +287,7 @@ int main(int argc, char**)
 {
     int alignment = 32;
     int item_size = 6 * sizeof(float);
-    int iteration_count = 64 * 1024;
+    int iteration_count = 32 * 1024;
     int      data_size  = 3 * 8 * 1024 * argc;
     int     items_count = data_size / item_size;
 
@@ -307,7 +307,6 @@ int main(int argc, char**)
         positions[i].y = random_float_01();
         positions[i].z = random_float_01();
 
-
         velocities[i].x = random_float_01();
         velocities[i].y = random_float_01();
         velocities[i].z = random_float_01();
@@ -322,53 +321,49 @@ int main(int argc, char**)
     }
 
     apply_velocity_noopt(positions, velocities, items_count);
-    u64 min_elapsed_cycles;
-    u64 end_clock;
-    u64 elapsed_cycles;
-    f64 op_per_clock;
 
+    auto run_test_ = [&] (auto func, const char* func_name) {
+        u64 min_elapsed_cycles = -1;
+        for (int it_i = 0; it_i < iteration_count; it_i++) {
+            u64 start_clock = __rdtsc();
 
-#define test_func(func_name)                                         \
-    min_elapsed_cycles = -1;                                         \
-    for (int it_i = 0; it_i < iteration_count; it_i++) {             \
-        u64 start_clock = __rdtsc();                                 \
-                                                                     \
-        func_call(func_name);               \
-                                                                     \
-        end_clock = __rdtsc();                                       \
-        elapsed_cycles = end_clock - start_clock;                    \
-        if (elapsed_cycles < min_elapsed_cycles)                     \
-            min_elapsed_cycles = elapsed_cycles;                     \
-                                                                     \
-        if (elapsed_cycles <= 1)                                     \
-            printf("Hey!\n");                                        \
-    }                                                                \
-                                                                     \
-    op_per_clock = 3.0 * (f64)items_count / (f64)min_elapsed_cycles; \
-    printf("%s: op/clock: %f\n", #func_name, op_per_clock)           \
+            func();
 
-#define func_call(func_name) func_name(positions, velocities, items_count)
-    test_func(apply_velocity_noopt);
-    test_func(apply_velocity_dual_noopt);
-    test_func(apply_velocity_quad_noopt);
-    test_func(apply_velocity_octo_noopt);
-    test_func(apply_velocity_ref_noopt);
-    test_func(apply_velocity_opt);
-    test_func(apply_velocity_dual_opt);
-    test_func(apply_velocity_quad_opt);
-    test_func(apply_velocity_octo_opt);
-#undef func_call
+            u64 end_clock = __rdtsc();
+            u64 elapsed_cycles = end_clock - start_clock;
+            if (elapsed_cycles < min_elapsed_cycles)
+                min_elapsed_cycles = elapsed_cycles;
 
-#define func_call(func_name) func_name(pxs, pys, pzs, vxs, vys, vzs, items_count)
-    test_func(apply_velocity_soa_noopt);
-    test_func(apply_velocity_soa_opt);
-    test_func(apply_velocity_dual_soa_opt);
-    test_func(apply_velocity_quad_soa_opt);
-    test_func(apply_velocity_soa_avx);
-    test_func(apply_velocity_soa_dual_avx);
-    test_func(apply_velocity_soa_quad_avx);
-    test_func(apply_velocity_soa_avx_2);
-#undef func_call
+            if (elapsed_cycles <= 1)
+                printf("Hey!\n");
+        }
+
+        f64 op_per_clock = 3.0 * (f64)items_count / (f64)min_elapsed_cycles;
+        printf("%s: op/clock: %f\n", func_name, op_per_clock);
+    };
+
+#define run_test(func_name) run_test_([&] { func_name(positions, velocities, items_count); }, #func_name)
+    run_test(apply_velocity_noopt);
+    run_test(apply_velocity_dual_noopt);
+    run_test(apply_velocity_quad_noopt);
+    run_test(apply_velocity_octo_noopt);
+    run_test(apply_velocity_ref_noopt);
+    run_test(apply_velocity_opt);
+    run_test(apply_velocity_dual_opt);
+    run_test(apply_velocity_quad_opt);
+    run_test(apply_velocity_octo_opt);
+#undef run_test
+
+#define run_test(func_name) run_test_([&] { func_name(pxs, pys, pzs, vxs, vys, vzs, items_count); }, #func_name)
+    run_test(apply_velocity_soa_noopt);
+    run_test(apply_velocity_soa_opt);
+    run_test(apply_velocity_dual_soa_opt);
+    run_test(apply_velocity_quad_soa_opt);
+    run_test(apply_velocity_soa_avx);
+    run_test(apply_velocity_soa_dual_avx);
+    run_test(apply_velocity_soa_quad_avx);
+    run_test(apply_velocity_soa_avx_2);
+#undef run_test
 
     return 0;
 }
