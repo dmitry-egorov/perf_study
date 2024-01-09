@@ -162,6 +162,7 @@
     <ClCompile Include="perf_test_entities.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="utility\cpu_freq.h" />
     <ClInclude Include="utility\malloc_ex.h" />
     <ClInclude Include="utility\syntax.h" />
   </ItemGroup>

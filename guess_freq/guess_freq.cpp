@@ -10,14 +10,14 @@ typedef double f64;
 #include <intrin.h>
 #include <windows.h>
 
-static u64 GetOSTimerFreq(void)
+static u64 get_os_timer_freq(void)
 {
 	LARGE_INTEGER Freq;
 	QueryPerformanceFrequency(&Freq);
 	return Freq.QuadPart;
 }
 
-static u64 ReadOSTimer(void)
+static u64 read_os_timer(void)
 {
 	LARGE_INTEGER Value;
 	QueryPerformanceCounter(&Value);
@@ -58,17 +58,17 @@ int main(int ArgCount, char** Args)
 		MillisecondsToWait = atol(Args[1]);
 	}
 
-	u64 OSFreq = GetOSTimerFreq();
+	u64 OSFreq = get_os_timer_freq();
 	printf("    OS Freq: %llu (reported)\n", OSFreq);
 
 	u64 CPUStart = read_cpu_timer();
-	u64 OSStart = ReadOSTimer();
+	u64 OSStart = read_os_timer();
 	u64 OSEnd = 0;
 	u64 OSElapsed = 0;
 	u64 OSWaitTime = OSFreq * MillisecondsToWait / 1000;
 	while (OSElapsed < OSWaitTime)
 	{
-		OSEnd = ReadOSTimer();
+		OSEnd = read_os_timer();
 		OSElapsed = OSEnd - OSStart;
 	}
 
